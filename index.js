@@ -6,14 +6,14 @@ script.crossOrigin = 'anonymous';
 
 document.getElementsByTagName('head')[0].appendChild(script);
 
-export async function start(videoElement, onResults) {
+export async function start(videoElement, onResults, modelSelection) {
   let selfieSegmentation = new SelfieSegmentation({
     locateFile: (file) => {
       return `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`;
     },
   });
   selfieSegmentation.setOptions({
-    modelSelection: 1,
+    modelSelection: modelSelection,
   });
   selfieSegmentation.onResults(onResults);
 
