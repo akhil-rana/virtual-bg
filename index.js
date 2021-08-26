@@ -40,11 +40,6 @@ export async function blurBackground(
     );
   });
 
-  let myStream = await navigator.mediaDevices.getUserMedia({
-    video: { width: { ideal: 1024 }, height: { ideal: 720 } },
-  });
-
-  inputVideoElement.srcObject = myStream;
   inputVideoElement.addEventListener('play', () => {
     async function step() {
       await selfieSegmentation.send({ image: inputVideoElement });
