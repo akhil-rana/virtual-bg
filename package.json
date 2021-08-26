@@ -6,11 +6,13 @@
     "type": "git",
     "url": "https://github.com/akhil-rana/virtual-bg"
   },
+  "homepage": "https://github.com/akhil-rana/virtual-bg",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Akhil Rana",
+  "typings": "./index.d.ts",
   "license": "ISC",
   "dependencies": {
     "@mediapipe/selfie_segmentation": "^0.1.1629494320"
