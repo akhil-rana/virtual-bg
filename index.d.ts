@@ -1,5 +1,6 @@
-export function start(
-  videoElement: HTMLVideoElement,
-  onResults: Function,
-  modelSelection: number
+export function blurBackground(
+  inputVideoElement: HTMLVideoElement,
+  outputCanvasElement: HTMLCanvasElement,
+  blurIntensity?: number,
+  modelSelection?: number
 ): any;
