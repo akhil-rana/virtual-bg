@@ -1,11 +1,11 @@
-## Easily add virtual background effects to your video/camera input inside any web browser<br/><br/>
-
+## Easily add virtual background effects to your video/camera input inside any web browser<br/>
+#### Try a working background blur working demo [here](http://demo.virtualbg.akhilrana.com/)<br/>
 
 
 
     npm install virtual-bg
 
-### A simple example to blur background camera stream:<br/><br/>
+### A simple example to blur background camera stream:<br/>
 
 #### index.html
     <div  id="app">
@@ -27,11 +27,11 @@
 
     inputVideoElement.srcObject = myStream;
 
-    segmentBackground(inputVideoElement, outputCanvasElement);
-    applyBlur(7);
+    segmentBackground(inputVideoElement, outputCanvasElement);  // segments foreground & background background
+    applyBlur(7); // applies a blur intensity of 7px to the background 
     
 
-<br/><br/><br/>
+<br/><br/>
 
 <b>Note</b>: This library is using  [mediapipe's selfie segmentation](https://www.npmjs.com/package/@mediapipe/selfie_segmentation) model and and library as a base. 
 
