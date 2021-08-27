@@ -11,6 +11,7 @@ const backgroundCanvasElement = document.createElement('canvas');
 const backgroundCanvasCtx = backgroundCanvasElement.getContext('2d');
 
 let outputCanvasCtx = null;
+let effectType = 'blur';
 
 export async function segmentBackground(
   inputVideoElement,
@@ -55,7 +56,8 @@ function mergeForegroundBackground(
   results
 ) {
   makeCanvasLayer(results, foregroundCanvasElement, 'foreground');
-  makeCanvasLayer(results, backgroundCanvasElement, 'background');
+  if (effectType === 'blur')
+    makeCanvasLayer(results, backgroundCanvasElement, 'background');
   outputCanvasCtx.drawImage(backgroundCanvasElement, 0, 0);
   outputCanvasCtx.drawImage(foregroundCanvasElement, 0, 0);
 }
@@ -88,6 +90,20 @@ function makeCanvasLayer(results, canvasElement, type) {
   canvasCtx.restore();
 }
 
-export function applyBlur(blurIntensity) {
+export function applyBlur(blurIntensity = 7) {
+  if (effectType !== 'blur') effectType = 'blur';
   backgroundCanvasCtx.filter = `blur(${blurIntensity}px)`;
+}
+
+export function applyImageBackground(image) {
+  effectType = 'image';
+  setTimeout(() => {
+    backgroundCanvasCtx.drawImage(
+      image,
+      0,
+      0,
+      backgroundCanvasElement.width,
+      backgroundCanvasElement.height
+    );
+  }, 100);
 }

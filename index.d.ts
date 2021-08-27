@@ -5,3 +5,4 @@ export function segmentBackground(
 ): any;
 
 export function applyBlur(blurIntensity?: number): any;
+export function applyImageBackground(image: HTMLImageElement): any;
