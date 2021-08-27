@@ -8,14 +8,14 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 const foregroundCanvasElement = document.createElement('canvas');
 const backgroundCanvasElement = document.createElement('canvas');
+const backgroundCanvasCtx = backgroundCanvasElement.getContext('2d');
 
 let outputCanvasCtx = null;
 
-export async function blurBackground(
+export async function segmentBackground(
   inputVideoElement,
   outputCanvasElement,
-  blurIntensity = 10,
-  modelSelection = 0
+  modelSelection = 1
 ) {
   foregroundCanvasElement.width = backgroundCanvasElement.width =
     outputCanvasElement.width;
@@ -35,7 +35,6 @@ export async function blurBackground(
     mergeForegroundBackground(
       foregroundCanvasElement,
       backgroundCanvasElement,
-      blurIntensity,
       results
     );
   });
@@ -51,16 +50,13 @@ export async function blurBackground(
 }
 
 function mergeForegroundBackground(
-  foregroundCanvasElement = foregroundCanvasElement,
-  backgroundCanvasElement = backgroundCanvasElement,
-  blurIntensity,
+  foregroundCanvasElement,
+  backgroundCanvasElement,
   results
 ) {
   makeCanvasLayer(results, foregroundCanvasElement, 'foreground');
   makeCanvasLayer(results, backgroundCanvasElement, 'background');
   outputCanvasCtx.drawImage(backgroundCanvasElement, 0, 0);
-  const backgroundCanvasCtx = backgroundCanvasElement.getContext('2d');
-  backgroundCanvasCtx.filter = `blur(${blurIntensity}px)`;
   outputCanvasCtx.drawImage(foregroundCanvasElement, 0, 0);
 }
 
@@ -90,4 +86,8 @@ function makeCanvasLayer(results, canvasElement, type) {
   );
 
   canvasCtx.restore();
+}
+
+export function applyBlur(blurIntensity) {
+  backgroundCanvasCtx.filter = `blur(${blurIntensity}px)`;
 }

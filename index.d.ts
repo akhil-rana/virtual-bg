@@ -1,6 +1,7 @@
-export function blurBackground(
+export function segmentBackground(
   inputVideoElement: HTMLVideoElement,
   outputCanvasElement: HTMLCanvasElement,
-  blurIntensity?: number,
   modelSelection?: number
 ): any;
+
+export function applyBlur(blurIntensity?: number): any;
