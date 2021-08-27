@@ -27,8 +27,11 @@
 
     inputVideoElement.srcObject = myStream;
 
-    segmentBackground(inputVideoElement, outputCanvasElement);  // segments foreground & background background
-    applyBlur(7); // applies a blur intensity of 7px to the background 
+    // segments foreground & background
+    segmentBackground(inputVideoElement, outputCanvasElement);  
+    
+    // applies a blur intensity of 7px to the background 
+    applyBlur(7); 
     
 
 <br/><br/>
