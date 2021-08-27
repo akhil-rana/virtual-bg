@@ -29,14 +29,14 @@
 
     // segments foreground & background
     segmentBackground(inputVideoElement, outputCanvasElement);  
-    
+
     // applies a blur intensity of 7px to the background 
     applyBlur(7); 
     
 
 <br/><br/>
 
-<b>Note</b>: This library is using  [mediapipe's selfie segmentation](https://www.npmjs.com/package/@mediapipe/selfie_segmentation) model and and library as a base. 
+<b>Note</b>: I'm is using  [mediapipe's selfie segmentation](https://www.npmjs.com/package/@mediapipe/selfie_segmentation) model and library as a base. 
 
 I'll be adding more features like image, video backgrounds and more in the future. Stay updated.
 
