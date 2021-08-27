@@ -5,7 +5,7 @@
 
     npm install virtual-bg
 
-### A simple example to blur background camera stream:<br/>
+### A simple example to apply blur/image background to camera input:<br/>
 
 #### index.html
     <div  id="app">
@@ -32,12 +32,17 @@
 
     // applies a blur intensity of 7px to the background 
     applyBlur(7); 
+
+    // applies an image background
+    const image = new Image();
+    image.src = 'https://imageurl.jpg'
+    applyImageBackground(image);
     
 
 <br/><br/>
 
 <b>Note</b>: I'm is using  [mediapipe's selfie segmentation](https://www.npmjs.com/package/@mediapipe/selfie_segmentation) model and library as a base. 
 
-I'll be adding more features like image, video backgrounds and more in the future. Stay updated.
+I'll be adding more features like video backgrounds, screen share backgrounds and more in the future. Stay updated.
 
 For any doubts, please contact me at contact@akhilrana.com or start a issue/discussion at https://github.com/akhil-rana/virtual-BG-demo
