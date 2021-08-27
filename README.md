@@ -1,5 +1,5 @@
 ## Easily add virtual background effects to your video/camera input inside any web browser<br/>
-#### Try a working background blur working demo [here](http://demo.virtualbg.akhilrana.com/)<br/>
+#### Try a working background blur demo [here](http://demo.virtualbg.akhilrana.com/)<br/>
 
 
 
