@@ -2,9 +2,10 @@
 
 
 
-### A simple example to blur background camera stream:<br/><br/>
 
     npm install virtual-bg
+
+### A simple example to blur background camera stream:<br/><br/>
 
 #### index.html
     <div  id="app">
@@ -12,7 +13,6 @@
         <canvas id="output_canvas" width="1280px" height="720px"></canvas>
     </div>
 
- <br/>
 
 #### index.js
 
