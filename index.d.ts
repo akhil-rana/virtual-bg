@@ -1,7 +1,7 @@
 export function segmentBackground(
   inputVideoElement: HTMLVideoElement,
   outputCanvasElement: HTMLCanvasElement,
-  modelSelection?: number
+  modelSelection?: 0 | 1
 ): any;
 
 export function applyBlur(blurIntensity?: number): any;
