@@ -12,35 +12,35 @@ or include directly in HTML:
 ### A simple example to apply blur/image background to camera input:<br/>
 #### index.html
 ```html
-    <div>
-        <video autoplay="true" id="inputVideoElement"></video>
-        <canvas id="output_canvas"></canvas>
-    </div>
+<div>
+    <video autoplay="true" id="inputVideoElement"></video>
+    <canvas id="output_canvas"></canvas>
+</div>
 ```
 
 #### index.js
 ```js
-    import { segmentBackground, applyBlur, applyImageBackground } from 'virtual-bg';
+import { segmentBackground, applyBlur, applyImageBackground } from'virtual-bg';
 
-    const inputVideoElement = document.querySelector('#inputVideoElement');
-    const outputCanvasElement = document.querySelector('#output_canvas');
+const inputVideoElement = document.querySelector('#inputVideoElement');
+const outputCanvasElement = document.querySelector('#output_canvas');
 
-    let myStream = await navigator.mediaDevices.getUserMedia({
-          video: true
-    });
+let myStream = await navigator.mediaDevices.getUserMedia({
+      video: true
+});
 
-    inputVideoElement.srcObject = myStream;
+inputVideoElement.srcObject = myStream;
 
-    // segments foreground & background
-    segmentBackground(inputVideoElement, outputCanvasElement);  
+// segments foreground & background
+segmentBackground(inputVideoElement, outputCanvasElement);  
 
-    // applies a blur intensity of 7px to the background 
-    applyBlur(7); 
+// applies a blur intensity of 7px to the background 
+applyBlur(7); 
 
-    // applies an image background
-    const image = new Image();
-    image.src = 'https://imageurl.jpg'
-    applyImageBackground(image);
+// applies an image background
+const image = new Image();
+image.src = 'https://imageurl.jpg'
+applyImageBackground(image);
 ```
 ### API:<br/>
 
