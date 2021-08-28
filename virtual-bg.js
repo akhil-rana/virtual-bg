@@ -11,9 +11,11 @@ const backgroundCanvasElement = document.createElement('canvas');
 const backgroundCanvasCtx = backgroundCanvasElement.getContext('2d');
 
 let outputCanvasCtx = null;
-let effectType = 'blur';
+let effectType = 'blur'; // blur | video | image
 let backgroundImage = null;
 let backgroundVideo = null;
+let foregroundType = 'normal'; // normal | presenter
+let presenterModeOffset = 0;
 
 export async function segmentBackground(
   inputVideoElement,
@@ -77,7 +79,15 @@ function mergeForegroundBackground(
     );
   }
   outputCanvasCtx.drawImage(backgroundCanvasElement, 0, 0);
-  outputCanvasCtx.drawImage(foregroundCanvasElement, 0, 0);
+  if (foregroundType === 'presenter')
+    outputCanvasCtx.drawImage(
+      foregroundCanvasElement,
+      presenterModeOffset,
+      foregroundCanvasElement.height * 0.5,
+      foregroundCanvasElement.width * 0.5,
+      foregroundCanvasElement.height * 0.5
+    );
+  else outputCanvasCtx.drawImage(foregroundCanvasElement, 0, 0);
 }
 
 function makeCanvasLayer(results, canvasElement, type) {
@@ -110,11 +120,13 @@ function makeCanvasLayer(results, canvasElement, type) {
 
 export function applyBlur(blurIntensity = 7) {
   effectType = 'blur';
+  foregroundType = 'normal';
   backgroundCanvasCtx.filter = `blur(${blurIntensity}px)`;
 }
 
 export function applyImageBackground(image) {
   backgroundImage = image;
+  foregroundType = 'normal';
   effectType = 'image';
 }
 
@@ -126,4 +138,22 @@ export function applyVideoBackground(video) {
     video.muted = true;
   });
   effectType = 'video';
+}
+
+export function applyScreenBackground(stream) {
+  const videoElement = document.createElement('video');
+  videoElement.srcObject = stream;
+  backgroundVideo = videoElement;
+
+  videoElement.autoplay = true;
+  videoElement.loop = true;
+  videoElement.addEventListener('play', () => {
+    videoElement.muted = true;
+  });
+  effectType = 'video';
+}
+
+export function changeForegroundType(type, offset = 0) {
+  foregroundType = type;
+  presenterModeOffset = offset;
 }
