@@ -12,6 +12,8 @@ const backgroundCanvasCtx = backgroundCanvasElement.getContext('2d');
 
 let outputCanvasCtx = null;
 let effectType = 'blur';
+let backgroundImage = null;
+let backgroundVideo = null;
 
 export async function segmentBackground(
   inputVideoElement,
@@ -47,7 +49,6 @@ export async function segmentBackground(
     }
     requestAnimationFrame(step);
   });
-  inputVideoElement.addEventListener('pause', async () => {});
 }
 
 function mergeForegroundBackground(
@@ -58,6 +59,23 @@ function mergeForegroundBackground(
   makeCanvasLayer(results, foregroundCanvasElement, 'foreground');
   if (effectType === 'blur')
     makeCanvasLayer(results, backgroundCanvasElement, 'background');
+  else if (effectType === 'image') {
+    backgroundCanvasCtx.drawImage(
+      backgroundImage,
+      0,
+      0,
+      backgroundCanvasElement.width,
+      backgroundCanvasElement.height
+    );
+  } else if (effectType === 'video') {
+    backgroundCanvasCtx.drawImage(
+      backgroundVideo,
+      0,
+      0,
+      backgroundCanvasElement.width,
+      backgroundCanvasElement.height
+    );
+  }
   outputCanvasCtx.drawImage(backgroundCanvasElement, 0, 0);
   outputCanvasCtx.drawImage(foregroundCanvasElement, 0, 0);
 }
@@ -91,19 +109,21 @@ function makeCanvasLayer(results, canvasElement, type) {
 }
 
 export function applyBlur(blurIntensity = 7) {
-  if (effectType !== 'blur') effectType = 'blur';
+  effectType = 'blur';
   backgroundCanvasCtx.filter = `blur(${blurIntensity}px)`;
 }
 
 export function applyImageBackground(image) {
+  backgroundImage = image;
   effectType = 'image';
-  setTimeout(() => {
-    backgroundCanvasCtx.drawImage(
-      image,
-      0,
-      0,
-      backgroundCanvasElement.width,
-      backgroundCanvasElement.height
-    );
-  }, 100);
+}
+
+export function applyVideoBackground(video) {
+  backgroundVideo = video;
+  video.autoplay = true;
+  video.loop = true;
+  video.addEventListener('play', () => {
+    video.muted = true;
+  });
+  effectType = 'video';
 }
