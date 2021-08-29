@@ -82,7 +82,7 @@ function mergeForegroundBackground(
   if (foregroundType === 'presenter')
     outputCanvasCtx.drawImage(
       foregroundCanvasElement,
-      presenterModeOffset,
+      foregroundCanvasElement.width * 0.5 - presenterModeOffset,
       foregroundCanvasElement.height * 0.5,
       foregroundCanvasElement.width * 0.5,
       foregroundCanvasElement.height * 0.5
