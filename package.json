@@ -1,6 +1,6 @@
 {
   "name": "virtual-bg",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Easily add virtual background effects to your video/camera input inside any web browser",
   "repository": {
     "type": "git",
